@@ -43,7 +43,7 @@ def create_periodic_iva_declaration():
     driver.find_element_by_xpath("//lf-radio[@lf-catalog = 'apuramento-tem-operacoes-adquirente-com-liq-imposto']//input[@value = '02']").click()
 
     salary_formatted = str(salary * 100)
-    driver.find_element_by_xpath("//input[@name='btOperacoesIsentasSemDeducao']").send_keys(salary_formatted)
+    driver.find_element_by_xpath("//input[@name='btOperacoesIsentasComDeducao']").send_keys(salary_formatted)
 
     driver.find_element_by_xpath("//button[contains(text(), 'Submeter')]").click()
 
