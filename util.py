@@ -7,7 +7,7 @@ def minus_one_month(date):
 
 def login(driver, config):
     username_field = driver.find_element_by_id("username")
-    password_field = driver.find_element_by_id("password")
+    password_field = driver.find_element_by_id("password-nif")
 
     username_field.send_keys(config.get("portal_financas", "nif"))
     password_field.send_keys(config.get("portal_financas", "password"))
