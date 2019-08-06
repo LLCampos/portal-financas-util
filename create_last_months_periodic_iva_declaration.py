@@ -49,7 +49,11 @@ def create_periodic_iva_declaration():
     salary_formatted = str(salary * 100)
     driver.find_element_by_xpath("//lf-number[@path='btOperacoesIsentasComDeducao']//input").send_keys(salary_formatted)
 
-    driver.find_element_by_xpath("//span[contains(text(), 'Entregar')]").click()
+    driver.find_element_by_xpath("//*[contains(@class,'navigation-conclude')]//span[contains(text(), 'Entregar')]").click()
+    sleep(1)
+    driver.find_element_by_xpath("//*[contains(@class,'modal-footer')]//span[contains(text(), 'Entregar')]").click()
+    driver.find_element_by_xpath("//span[text() = 'Autenticar']").click()
+    login(driver, config)
 
 
 if __name__ == "__main__":
