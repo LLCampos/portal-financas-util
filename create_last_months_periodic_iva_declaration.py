@@ -52,6 +52,7 @@ def create_periodic_iva_declaration():
     driver.find_element_by_xpath("//*[contains(@class,'navigation-conclude')]//span[contains(text(), 'Entregar')]").click()
     sleep(1)
     driver.find_element_by_xpath("//*[contains(@class,'modal-footer')]//span[contains(text(), 'Entregar')]").click()
+    sleep(1)
     driver.find_element_by_xpath("//span[text() = 'Autenticar']").click()
     login(driver, config)
 
