@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import pandas as pd
 import argparse
 
@@ -24,7 +26,11 @@ def convert_to_tao_finance_format(transactions):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+
+    description = """Converts ETFMatic trade history .csv file to the format accepted by TaoFinance: AnexoG script (see 
+    https://taofinance.pt/como-preencher-anexo-g-irs-mais-valias-de-acoes-parte-2/)"""
+
+    parser = argparse.ArgumentParser(description=description)
     parser.add_argument('input', type=str, help='path to ETFMatic trade history csv')
     parser.add_argument('output', type=str, help='output path to csv in TaoFinance format')
     parser.add_argument('year', type=int, help='year for which to look for sell transactions')
