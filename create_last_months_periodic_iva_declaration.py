@@ -15,9 +15,9 @@ def create_periodic_iva_declaration():
     driver = webdriver.Chrome(config.get("other", "chromedriver_path"))
 
     driver.get(config.get("portal_financas", "url_consultar_facturas"))
-    driver.fullscreen_window()
     login(driver, config)
     sleep(2)
+    driver.fullscreen_window()
     tables_recibos = driver.find_elements_by_class_name("tbody-border-primary")
     assert len(tables_recibos) == 1
     table = tables_recibos[0]
