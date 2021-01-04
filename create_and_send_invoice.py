@@ -64,7 +64,12 @@ def create_fatura_verde():
     description = (f'Monthy fee {last_month_date.strftime("%Y-%m-%d")} - {invoice_date.strftime("%Y-%m-%d")}\n' 
                    'Bank account information:\n' 
                    f'IBAN: {config.get("bank_account_info", "iban")}\n'
-                   f'SWIFT/BIC: {config.get("bank_account_info", "swift")}')
+                   f'SWIFT/BIC: {config.get("bank_account_info", "swift")}\n'
+                   f'----------------------------------------------------\n'
+                   f'{config.get("company", "company_name")}\n'
+                   f'{config.get("company", "company_address")}\n'
+                   f'Co. Reg. No. {config.get("company", "company_code")}\n'
+                   f'VAT Reg. No. {config.get("company", "company_vat")}')
 
     description_field = driver.find_element_by_xpath("//textarea[@name='servicoPrestado']")
     description_field.send_keys(description)
