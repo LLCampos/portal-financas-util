@@ -53,20 +53,12 @@ def create_fatura_verde():
     driver.find_element_by_xpath(f"//option[contains(@label, '{company_country}')]").click()
 
     company_code_field = driver.find_element_by_xpath("//input[@name='nifEstrangeiro']")
-    company_code_field.send_keys(config.get("company", "company_code"))
+    company_code_field.send_keys(config.get("company", "company_vat"))
 
     company_name_field = driver.find_element_by_xpath("//input[@name='nomeAdquirente']")
     company_name_field.send_keys(config.get("company", "company_name"))
 
-    # Final info
-    last_month_date = minus_one_month(invoice_date)
-
-    description = (f'Monthy fee {last_month_date.strftime("%Y-%m-%d")} - {invoice_date.strftime("%Y-%m-%d")}\n' 
-                   'Bank account information:\n' 
-                   f'IBAN: {config.get("bank_account_info", "iban")}\n'
-                   f'SWIFT/BIC: {config.get("bank_account_info", "swift")}\n'
-                   f'----------------------------------------------------\n'
-                   f'{config.get("company", "company_name")}\n'
+    description = (f'{config.get("company", "company_name")}\n'
                    f'{config.get("company", "company_address")}\n'
                    f'Co. Reg. No. {config.get("company", "company_code")}\n'
                    f'VAT Reg. No. {config.get("company", "company_vat")}')
@@ -119,9 +111,8 @@ def send_last_invoice_by_email():
     sender_name = config.get("email", "sender_name")
     sender_address = config.get("email", "sender_address")
     sender_password = config.get("email", "sender_password")
-    recipient_name = config.get("email", "recipient_name")
-    recipient_adress = config.get("email", "recipient_address")
-    recipients = [sender_address, recipient_adress]
+    recipient_address = config.get("email", "recipient_address")
+    recipients = [sender_address, recipient_address]
 
     # Create the enclosing (outer) message
     outer = MIMEMultipart()
@@ -130,8 +121,11 @@ def send_last_invoice_by_email():
     outer['From'] = sender_address
     outer.preamble = 'You will not see this in a MIME-aware mail reader.\n'
 
-    text = (f"Hello, {recipient_name},\n\n"
+    text = (f"Hello,\n\n"
             f"Here goes the invoice for the month of {last_months_date.strftime('%B')}. :)\n\n"
+            f'Bank account information:\n' 
+            f'IBAN: {config.get("bank_account_info", "iban")}\n'
+            f'SWIFT/BIC: {config.get("bank_account_info", "swift")}\n\n'
             f"Best regards,\n"
             f"{sender_name}")
     outer.attach(MIMEText(text, 'plain'))
