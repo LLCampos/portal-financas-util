@@ -83,7 +83,7 @@ def create_fatura_verde():
 
 
 def send_last_invoice_by_email():
-    driver = webdriver.Chrome(config.get("other", "chromedriver_path"), chrome_options=chrome_options)
+    driver = webdriver.Chrome(config.get("other", "chromedriver_path"), options=chrome_options)
     driver.get(config.get("portal_financas", "url_consultar_facturas"))
     login(driver, config)
 
