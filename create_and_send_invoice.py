@@ -65,8 +65,6 @@ def create_fatura_recibo():
     salary_field = driver.find_element_by_xpath("//input[@name='valorBase']")
     salary_field.send_keys(salary)
 
-    sleep(1000000)
-
     driver.find_element_by_xpath("//button[text() = 'Emitir']").click()
     sleep(1)
     driver.find_element_by_xpath("//div[@class = 'modal-dialog']//button[text() = 'Emitir']").click()
