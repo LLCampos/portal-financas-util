@@ -33,7 +33,7 @@ def create_periodic_iva_declaration():
 
     driver.find_element_by_xpath("//lf-select[@path = 'localizacaoSede']//input").send_keys("Continente" + Keys.ENTER)
     driver.find_element_by_xpath("//lf-select[@path = 'anoDeclaracao']//input").send_keys(f"{today_last_month.year}{Keys.ENTER}")
-    driver.find_element_by_xpath("//lf-select[@path = 'periodoDeclaracao']//input").send_keys(today_last_month.strftime('%m') + Keys.ENTER)
+    driver.find_element_by_xpath("//lf-select[@path = 'periodoDeclaracao']//input").send_keys(today_last_month.strftime('%m') + Keys.DOWN + Keys.ENTER)
     driver.find_element_by_xpath("//lf-select[@path = 'prazo']//input").send_keys("Dentro do prazo" + Keys.ENTER)
 
     driver.find_element_by_xpath("//span[text() = ' Apuramento ']").click()
