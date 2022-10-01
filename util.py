@@ -6,6 +6,7 @@ def minus_one_month(date):
 
 
 def login(driver, config):
+    driver.find_elements_by_xpath('//span[text()="NIF"]')[0].click()
     username_field = driver.find_element_by_id("username")
     password_field = driver.find_element_by_id("password-nif")
 
