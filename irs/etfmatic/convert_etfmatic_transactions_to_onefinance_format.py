@@ -38,4 +38,4 @@ if __name__ == "__main__":
 
     transactions = get_transactions(args.input)
     transactions_tao_format = convert_to_onefinance_format(transactions)
-    transactions_tao_format.to_csv(args.output, index=False)
+    transactions_tao_format.to_csv(args.output, index=False, float_format='{:f}'.format)
