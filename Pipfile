@@ -8,6 +8,8 @@ selenium = "<4"
 pandas = "*"
 lxml = "*"
 cython = "*"
+webdriver-manager = "*"
+urllib3 = "==1.26.12"
 
 [dev-packages]
 

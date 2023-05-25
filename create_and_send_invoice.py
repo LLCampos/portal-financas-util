@@ -4,6 +4,7 @@ from datetime import datetime
 from time import sleep
 
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 from util import login
 
@@ -17,7 +18,7 @@ chrome_options.add_experimental_option("prefs", preferences)
 
 
 def create_fatura_recibo():
-    driver = webdriver.Chrome(config.get("other", "chromedriver_path"))
+    driver = webdriver.Chrome(ChromeDriverManager().install())
 
     logging.info("Entering page.")
     driver.get(config.get("portal_financas", "url_emitir_facturas"))
