@@ -1,9 +1,10 @@
 from configparser import ConfigParser
-from time import sleep
 from datetime import datetime
+from time import sleep
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from webdriver_manager.chrome import ChromeDriverManager
 
 from util import login, minus_one_month
 
@@ -12,7 +13,7 @@ config.read("conf.ini")
 
 
 def create_periodic_iva_declaration():
-    driver = webdriver.Chrome(config.get("other", "chromedriver_path"))
+    driver = webdriver.Chrome(ChromeDriverManager().install())
 
     driver.get(config.get("portal_financas", "url_consultar_facturas"))
     login(driver, config)
