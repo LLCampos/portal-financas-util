@@ -4,14 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-selenium = "<4"
+selenium = "*"
 pandas = "*"
 lxml = "*"
 cython = "*"
 webdriver-manager = "*"
-urllib3 = "==1.26.12"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.11"

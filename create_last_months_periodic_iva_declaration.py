@@ -3,7 +3,7 @@ from datetime import datetime
 from time import sleep
 
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 
 from util import login, minus_one_month
@@ -13,7 +13,7 @@ config.read("conf.ini")
 
 
 def create_periodic_iva_declaration():
-    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
 
     driver.get(config.get("portal_financas", "url_consultar_facturas"))
     login(driver, config)
