@@ -41,18 +41,12 @@ def create_periodic_iva_declaration():
         f"{today_last_month.year}{Keys.ENTER}")
     driver.find_element(By.XPATH, "//lf-select[@path = 'periodoDeclaracao']//input").send_keys(
         today_last_month.strftime('%m') + Keys.DOWN + Keys.ENTER)
-    driver.find_element(By.XPATH, "//lf-select[@path = 'prazo']//input").send_keys("Dentro do prazo" + Keys.ENTER)
 
     driver.find_element(By.XPATH, "//span[text() = ' Apuramento ']").click()
 
     sim = "0"
     nao = "1"
 
-    driver.find_element(By.XPATH,
-                        f"//lf-radio[@path = 'temOperacoesComLiqImposto']//input[@value='{nao}']/../i").click()
-    driver.find_element(By.XPATH,
-                        f"//lf-radio[@path = 'temOperacoesSemLiqImposto']//input[@value='{sim}']/../i").click()
-    driver.find_element(By.XPATH, f"//lf-radio[@path = 'temOperacoesDedutiveis']//input[@value='{nao}']/../i").click()
     driver.find_element(By.XPATH,
                         f"//lf-radio[@path = 'temOperacoesAdquirenteComLiqImposto']//input[@value='{nao}']/../i").click()
 
