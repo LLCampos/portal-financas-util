@@ -6,6 +6,7 @@ from time import sleep
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 from webdriver_manager.chrome import ChromeDriverManager
 
 from util import login
@@ -54,19 +55,83 @@ def create_fatura_recibo():
     company_name_field = driver.find_element(By.XPATH, "//input[@name='nomeAdquirente']")
     company_name_field.send_keys(config.get("company", "company_name"))
 
-    description = (f'{config.get("company", "company_name")}\n'
-                   f'{config.get("company", "company_address")}\n'
-                   f'Co. Reg. No. {config.get("company", "company_code")}')
+    button_morada_cliente = driver.find_element(By.ID, "buttonMoradaCliente")
+    button_morada_cliente.click()
+    sleep(1)
 
-    description_field = driver.find_element(By.XPATH, "//textarea[@name='servicoPrestado']")
-    description_field.send_keys(description)
+    company_address = config.get("company", "company_address")
+    address_field = driver.find_element(By.XPATH, "//textarea[@name='moradaAdqClienteL']")
+    address_field.send_keys(company_address)
 
-    driver.find_element(By.XPATH, "//option[@label='Regras de localização - art.º 6.º [regras especificas]']").click()
-    driver.find_element(By.XPATH, "//option[@label = 'Sem retenção - Não residente sem estabelecimento']").click()
+    company_postal_code = config.get("company", "company_postal_code")
+    postal_code_field = driver.find_element(By.XPATH, "//input[@name='codPostalAdqCliente']")
+    postal_code_field.send_keys(company_postal_code)
+
+    company_city = config.get("company", "company_city")
+    city_field = driver.find_element(By.XPATH, "//input[@name='localidadeAdqCliente']")
+    city_field.send_keys(company_city)
+
+
+    bens_servicos_element = driver.find_element(By.ID, "Bens&ServicosFT")
+    bens_servicos_adicionar_button = bens_servicos_element.find_element(By.XPATH, ".//button[contains(text(), 'Adicionar')]")
+    bens_servicos_adicionar_button.click()
+
+    sleep(1)
+
+    tipo_input = driver.find_element(By.XPATH, "//select[@name='tipoProduto']")
+    Select(tipo_input).select_by_visible_text("Serviço")
+
+    tipo_ref_input = driver.find_element(By.XPATH, "//select[@name='tipoRef']")
+    Select(tipo_ref_input).select_by_visible_text("Outro")
+
+    referencia_input = driver.find_element(By.XPATH, "//input[@name='referencia']")
+    referencia_input.send_keys("Serviço de desenvolvimento de software")
+
+    descricao_input = driver.find_element(By.XPATH, "//textarea[@name='descricao']")
+    descricao_input.send_keys("Serviço de desenvolvimento de software")
+
+    unidade_input = driver.find_element(By.XPATH, "//select[@name='unidade']")
+    Select(unidade_input).select_by_visible_text("mês - Mês")
 
     salary = str(int(config.get("company", "salary")) * 100)
-    salary_field = driver.find_element(By.XPATH, "//input[@name='valorBase']")
-    salary_field.send_keys(salary)
+    preco_unitario_input = driver.find_element(By.XPATH, "//input[@name='precoUnit']")
+    preco_unitario_input.send_keys(salary)
+
+    taxa_iva_input = driver.find_element(By.XPATH, "//select[@name='taxaIVA']")
+    Select(taxa_iva_input).select_by_visible_text("0%")
+
+    motivo_isencao_input = driver.find_element(By.XPATH, "//select[@name='motivoIsencaoLinha']")
+    Select(motivo_isencao_input).select_by_visible_text("IVA-autoliquidação-Artº 6º nº6 alínea a)do CIVA, a contrário")
+
+    sleep(1)
+    adicionar_produtos_modal = driver.find_element(By.ID, "adicionarProdutosModal")
+    guardar_button = adicionar_produtos_modal.find_element(By.XPATH, "//button[text()='Guardar']")
+    guardar_button.click()
+
+    button_pagamento = driver.find_element(By.ID, "buttonPagamento")
+    button_pagamento.click()
+    sleep(1)
+
+    pagamento_element = driver.find_element(By.ID, "pagamento")
+    pagamento_adicionar_button = pagamento_element.find_element(By.XPATH, ".//button[contains(text(), 'Adicionar')]")
+    pagamento_adicionar_button.click()
+
+    sleep(1)
+
+    payment_method_select = driver.find_element(By.XPATH, "//select[@name='formaPagamento']")
+    Select(payment_method_select).select_by_visible_text("Transferência Bancária")
+
+    montante_input = driver.find_element(By.XPATH, "//input[@name='montante']")
+    montante_input.send_keys(salary)
+
+    iban = config.get("company", "iban")
+    iban_input = driver.find_element(By.XPATH, "//input[@name='ibanPagamento']")
+    iban_input.send_keys(iban)
+
+    guardar_button = driver.find_element(By.XPATH, "//button[text()='Guardar']")
+    guardar_button.click()
+
+    sleep(1)
 
     driver.find_element(By.XPATH, "//button[text() = 'Emitir']").click()
     sleep(1)
