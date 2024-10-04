@@ -61,6 +61,7 @@ def create_periodic_iva_declaration():
     sleep(1)
     driver.find_element(By.XPATH, "//span[text() = 'Autenticar']").click()
     login(driver, config)
+    sleep(1)
 
 
 if __name__ == "__main__":
