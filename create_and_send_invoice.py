@@ -101,7 +101,7 @@ def create_fatura_recibo():
     Select(taxa_iva_input).select_by_visible_text("0%")
 
     motivo_isencao_input = driver.find_element(By.XPATH, "//select[@name='motivoIsencaoLinha']")
-    Select(motivo_isencao_input).select_by_visible_text("IVA-autoliquidação-Artº 6º nº6 alínea a)do CIVA, a contrário")
+    Select(motivo_isencao_input).select_by_visible_text("IVA - autoliquidação - Artigo 6.º n.º 6 alínea a) do CIVA, a contrário")
 
     sleep(1)
     adicionar_produtos_modal = driver.find_element(By.ID, "adicionarProdutosModal")
@@ -120,13 +120,6 @@ def create_fatura_recibo():
 
     payment_method_select = driver.find_element(By.XPATH, "//select[@name='formaPagamento']")
     Select(payment_method_select).select_by_visible_text("Transferência Bancária")
-
-    montante_input = driver.find_element(By.XPATH, "//input[@name='montante']")
-    montante_input.send_keys(salary)
-
-    iban = config.get("company", "iban")
-    iban_input = driver.find_element(By.XPATH, "//input[@name='ibanPagamento']")
-    iban_input.send_keys(iban)
 
     guardar_button = driver.find_element(By.XPATH, "//button[text()='Guardar']")
     guardar_button.click()
