@@ -97,7 +97,7 @@ def create_fatura_recibo():
     preco_unitario_input = driver.find_element(By.XPATH, "//input[@name='precoUnit']")
     preco_unitario_input.send_keys(salary)
 
-    taxa_iva_input = driver.find_element(By.XPATH, "//select[@name='taxaIVA']")
+    taxa_iva_input = driver.find_element(By.XPATH, "//select[@name='idTaxaIVA']")
     Select(taxa_iva_input).select_by_visible_text("0%")
 
     motivo_isencao_input = driver.find_element(By.XPATH, "//select[@name='motivoIsencaoLinha']")
@@ -106,7 +106,7 @@ def create_fatura_recibo():
     sleep(1)
     adicionar_produtos_modal = driver.find_element(By.ID, "adicionarProdutosModal")
     guardar_button = adicionar_produtos_modal.find_element(By.XPATH, "//button[text()='Guardar']")
-    guardar_button.click()
+    # guardar_button.click()
 
     button_pagamento = driver.find_element(By.ID, "buttonPagamento")
     button_pagamento.click()
