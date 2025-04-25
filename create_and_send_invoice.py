@@ -29,6 +29,7 @@ def create_fatura_recibo():
     login(driver, config)
 
     logging.info("Filling form.")
+    sleep(1)
 
     # Date
     today = datetime.today()
