@@ -8,11 +8,11 @@ def minus_one_month(date):
 
 
 def login(driver, config):
-    driver.find_elements(By.XPATH, '//span[text()="NIF"]')[0].click()
-    username_field = driver.find_element(By.ID, "username")
-    password_field = driver.find_element(By.ID, "password-nif")
+    driver.find_elements(By.XPATH, '//button[contains(., "NIF")]')[1].click()
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
 
     username_field.send_keys(config.get("portal_financas", "nif"))
     password_field.send_keys(config.get("portal_financas", "password"))
 
-    driver.find_element(By.NAME, "sbmtLogin").click()
+    driver.find_element(By.XPATH, "//button[text() = 'Autenticar']").click()
