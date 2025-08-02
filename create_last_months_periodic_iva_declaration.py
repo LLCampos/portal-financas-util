@@ -59,7 +59,7 @@ def create_periodic_iva_declaration():
     sleep(1)
     driver.find_element(By.XPATH, "//*[contains(@class,'modal-footer')]//span[contains(text(), 'Entregar')]").click()
     sleep(1)
-    driver.find_element(By.XPATH, "//span[text() = 'Autenticar']").click()
+    driver.find_element(By.XPATH, "//*[text() = 'Por Autenticar']").click()
     login(driver, config)
     sleep(1)
 
